@@ -7,3 +7,7 @@ Fitbitから安静時心拍数を取得してSlackへ通知するスクリプト
 3. run `get_access_token.rb`
 4. run `get_and_alert_resting_heart_rate.rb`
 5. enjoy!
+
+## 参考
+
+* http://kaorumori.hatenadiary.com/entry/2015/09/23/011006
