@@ -5,7 +5,8 @@ require 'rest-client'
 
 # 安静時心拍数をFitbitから取得してSlackへ通知するスクリプト
 #
-# デイリーでの実行を想定しており、Fitbitから取得できるaccess_tokenの有効期限は最大で8時間であるため、access_tokenの実行毎にaccess_tokenをrefreshする。refresh_tokenには期限が無いためこのような動作が可能となる。
+# デイリーでの実行を想定しており、Fitbitから取得できるaccess_tokenの有効期限は最大で8時間であるため、実行毎にaccess_tokenをrefreshする。
+# refresh_tokenには期限が無いためこのような動作が可能となる。
 # 実行前に各種セットアップスクリプトを実行してPitへ必要な情報を保存しておくこと。
 
 config = Pit.get('sakusaku-fitbit-kun', require: {
