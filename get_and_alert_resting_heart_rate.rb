@@ -46,13 +46,13 @@ today_stat = stats.pop
 recent_stats = stats.pop(14)
 
 recent_rates = recent_stats.select{|item| item[:resting_heart_rate]}.map{|item| item[:resting_heart_rate]}
-recent_avg_rate = recent_rates.size ? recent_rates.reduce(:+).to_f / recent_rates.size : nil
+recent_avg_rate = recent_rates.size ? (recent_rates.reduce(:+).to_f / recent_rates.size).round(1) : nil
 
 today_rate = today_stat[:resting_heart_rate]
 
 message = ''
 message += "本日の安静時心拍数は#{today_rate || '取得できません'}でした。"
-message += "直近2週間の平均安静時心拍数は#{recent_avg_rate.round(1) || '計算できません'}でした。"
+message += "直近2週間の平均安静時心拍数は#{recent_avg_rate || '計算できません'}でした。"
 if today_rate && recent_avg_rate && today_rate > (recent_avg_rate + 1.0)
   message += '安静時心拍数が高まっています。定時で帰りましょう。'
 end
