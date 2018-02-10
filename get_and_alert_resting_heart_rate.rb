@@ -50,18 +50,20 @@ recent_avg_rate = recent_rates.size ? (recent_rates.reduce(:+).to_f / recent_rat
 
 today_rate = today_stat[:resting_heart_rate]
 
-message = ''
-message += "本日の安静時心拍数は#{today_rate || '取得できません'}でした。"
-message += "直近2週間の平均安静時心拍数は#{recent_avg_rate || '計算できません'}でした。"
-if today_rate && recent_avg_rate && today_rate > (recent_avg_rate + 1.0)
-  message += '安静時心拍数が高まっています。定時で帰りましょう。'
-end
+if today_rate
+  message = ''
+  message += "本日の安静時心拍数は#{today_rate}でした。"
+  message += "直近2週間の平均安静時心拍数は#{recent_avg_rate || '計算できません'}でした。"
+  if recent_avg_rate && today_rate > (recent_avg_rate + 1.0)
+    message += '安静時心拍数が高まっています。定時で帰りましょう。'
+  end
 
-RestClient.post(
-  config[:webhook_url],
-  {
-    payload: {
-      text: message,
-    }.to_json,
-  }
-)
+  RestClient.post(
+    config[:webhook_url],
+    {
+      payload: {
+        text: message,
+      }.to_json,
+    }
+  )
+end
